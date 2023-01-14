@@ -1,0 +1,42 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           GDirections
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/estate-crawler#readme>
+homepage:       https://github.com/onliner10/GDirections#readme
+bug-reports:    https://github.com/onliner10/GDirections/issues
+author:         Mateusz Urban
+maintainer:     mateuszurban2@gmail.com
+copyright:      2023 Mateusz Urban
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/onliner10/GDirections
+
+library
+  exposed-modules:
+      Google.Directions
+      Google.Directions.Query
+  other-modules:
+      Paths_GDirections
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -XDeriveGeneric -XOverloadedStrings
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , download-curl
+    , text
+    , url
+  default-language: Haskell2010
