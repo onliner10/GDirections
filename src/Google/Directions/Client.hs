@@ -14,6 +14,7 @@ module Google.Directions.Client (
     ) where
 
 import           Data.Aeson              as JSON
+import           Data.Aeson.Casing       (snakeCase, aesonDrop)
 import           Data.ByteString         (fromStrict)
 import qualified Data.Text               as T
 import           GHC.Generics
@@ -39,6 +40,7 @@ data Route = Route {
 } deriving (Eq, Generic, Show)
 
 instance JSON.FromJSON Route where
+    parseJSON = JSON.genericParseJSON $ aesonDrop 0 snakeCase
 
 data TextValue = TextValue { text :: T.Text, value :: Double } deriving (Eq, Generic, Show)
 instance JSON.FromJSON TextValue where
@@ -48,19 +50,20 @@ data Coord = Coord { lng :: Double, lat :: Double } deriving (Eq,Generic, Show)
 instance JSON.FromJSON Coord where
 
 data Leg = Leg {
-    steps            :: [Step],
+    legSteps         :: [Step],
     legDistance      :: TextValue,
     legDuration      :: TextValue,
     legStartLocation :: Coord,
     legEndLocation   :: Coord,
-    startAddress     :: T.Text,
-    endAddress       :: T.Text
+    legStartAddress  :: T.Text,
+    legEndAddress    :: T.Text
 } deriving (Eq, Generic, Show)
 
 instance JSON.FromJSON Leg where
+    parseJSON = JSON.genericParseJSON $ aesonDrop 3 snakeCase
 
 data Step = Step {
-    htmlInstructions  :: T.Text,
+    stepHtmlInstructions  :: T.Text,
     stepDistance      :: TextValue,
     stepDuration      :: TextValue,
     stepStartLocation :: Coord,
@@ -68,6 +71,7 @@ data Step = Step {
 } deriving (Eq, Generic, Show)
 
 instance JSON.FromJSON Step where
+    parseJSON = JSON.genericParseJSON $ aesonDrop 4 snakeCase
 
 data PolyLine = PolyLine {
     points :: T.Text,

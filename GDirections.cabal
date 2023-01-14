@@ -34,6 +34,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -XDeriveGeneric -XOverloadedStrings
   build-depends:
       aeson
+    , aeson-casing
     , base >=4.7 && <5
     , bytestring
     , containers
