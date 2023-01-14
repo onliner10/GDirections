@@ -6,7 +6,9 @@ cabal-version: 1.12
 
 name:           GDirections
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/estate-crawler#readme>
+synopsis:       Simple client to interact with Google Directions API
+description:    Please see the README on GitHub at <https://github.com/onliner10/estate-crawler#README.md>
+category:       Web
 homepage:       https://github.com/onliner10/GDirections#readme
 bug-reports:    https://github.com/onliner10/GDirections/issues
 author:         Mateusz Urban
@@ -31,7 +33,10 @@ library
       Paths_GDirections
   hs-source-dirs:
       src
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -XDeriveGeneric -XOverloadedStrings
+  default-extensions:
+      DeriveGeneric
+      OverloadedStrings
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       aeson
     , aeson-casing
