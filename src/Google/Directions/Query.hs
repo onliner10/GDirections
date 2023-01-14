@@ -1,5 +1,5 @@
 {-# LANGUAGE TupleSections #-}
-module Google.Directions.Query (DirectionsQuery, toQueryParams) where
+module Google.Directions.Query (DirectionsQuery, createDirectionsQuery, toQueryParams, withArrivalTime, withDepartureTime, withTravelMode, withTransitMode, withTransitPreference, withTrafficModel, withWaypoints, withIncludeAlternateRoutes, withAvoidables, withUnits) where
 
 import System.Posix.Types (EpochTime)
 import qualified Data.Text as T
@@ -107,6 +107,36 @@ createDirectionsQuery origin dest = DirectionsQuery
         getAvoidables = mempty,
         getUnits = Nothing
     }
+
+withArrivalTime :: ArrivalTime -> DirectionsQuery -> DirectionsQuery
+withArrivalTime arrival x = x { getArrivalTime = Just arrival }
+
+withDepartureTime :: DepartureTime -> DirectionsQuery -> DirectionsQuery
+withDepartureTime depart x = x { getDepartureTime = Just depart }
+
+withTravelMode :: TravelMode -> DirectionsQuery -> DirectionsQuery
+withTravelMode mode x = x { getTravelMode = Just mode }
+
+withTransitMode :: [TransitMode] -> DirectionsQuery -> DirectionsQuery
+withTransitMode mode x = x { getTransitMode = Just mode }
+
+withTransitPreference :: TransitPreference -> DirectionsQuery -> DirectionsQuery
+withTransitPreference pref x = x { getTransitPreference = Just pref }
+
+withTrafficModel :: TrafficModel -> DirectionsQuery -> DirectionsQuery
+withTrafficModel model x = x { getTrafficModel = Just model }
+
+withWaypoints :: Waypoints -> DirectionsQuery -> DirectionsQuery
+withWaypoints waypoints x = x { getWaypoints = Just waypoints }
+
+withIncludeAlternateRoutes :: Bool -> DirectionsQuery -> DirectionsQuery
+withIncludeAlternateRoutes include x = x { getIncludeAlternateRoutes = include }
+
+withAvoidables :: [Avoidable] -> DirectionsQuery -> DirectionsQuery
+withAvoidables avoidables x = x { getAvoidables = avoidables }
+
+withUnits :: Units -> DirectionsQuery -> DirectionsQuery
+withUnits u x = x { getUnits = Just u }
 
 boolToParamValue :: Bool -> String
 boolToParamValue True  = "true"

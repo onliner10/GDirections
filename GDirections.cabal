@@ -25,6 +25,7 @@ source-repository head
 library
   exposed-modules:
       Google.Directions
+      Google.Directions.Client
       Google.Directions.Query
   other-modules:
       Paths_GDirections
