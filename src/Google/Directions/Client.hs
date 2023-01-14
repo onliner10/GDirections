@@ -1,8 +1,8 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 module Google.Directions.Client (
-        directions,
+        getDirections,
+        ApiKey (ApiKey),
         Directions (..),
         Route (..),
         TextValue (..),
@@ -95,13 +95,14 @@ instance JSON.FromJSON StatusCode where
     parseJSON (JSON.String v) = fail $ "Unknown status code: " ++ T.unpack v
     parseJSON _ = fail "Expected json string"
 
+newtype ApiKey = ApiKey { getApiKey :: T.Text }
 
-directions :: DirectionsQuery -> IO (Either String Directions)
-directions query = do
+getDirections :: ApiKey -> DirectionsQuery -> IO (Either String Directions)
+getDirections apiKey query = do
     let
         host = URL.Host (URL.HTTP True) "maps.googleapis.com" Nothing
         absoluteUrl = URL.Absolute host
-        params = toQueryParams query
+        params = toQueryParams query <> [("key", T.unpack $ getApiKey apiKey)]
         url = URL.URL absoluteUrl "/maps/api/directions/json" params
 
     rawResponseStr <- openURI $ exportURL url
